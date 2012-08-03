@@ -1,18 +1,45 @@
-<h2>Sign in</h2>
+<div class="alert hide">
+  <button class="close" data-dismiss="alert">×</button>
+  <span><%= devise_error_messages! %></span>
+</div>
 
-<div class="row"
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <div><%= f.label :email %><br />
-    <%= f.email_field :email %></div>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-horizontal"}) do |f| %>
+  <legend>Sign In</legend>
+  <fieldset>
 
-    <div><%= f.label :password %><br />
-    <%= f.password_field :password %></div>
+    <div class="control-group">
+      <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :email, :class => 'input-xlarge' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :password, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password, :class => 'input-xlarge' %>
+      </div>
+    </div>
 
     <% if devise_mapping.rememberable? -%>
-      <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox">
+            <%= f.check_box :remember_me %>
+            Remember me
+          </label>
+        </div>
+      </div>
     <% end -%>
-
-    <div><%= f.submit "Sign in" %></div>
-  <% end %>
-
-  <%= render "devise/shared/links" %>
+    <div class="form-actions">
+      <div class="btn-group">
+        <a class="btn btn-primary submit-form" href="#"><i class="icon-user icon-white"></i> Sign In</a>
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/users/sign_up"><i class="icon-pencil"></i> Sign Up</a></li>
+          <li><a href="/users/password/new"><i class="icon-trash"></i> Forgot Password?</a></li>
+        </ul>
+      </div>
+    </div>
+  </fieldset>
+<% end %>
