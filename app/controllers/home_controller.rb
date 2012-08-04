@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user!
   def index
-
   end
+
   def random
     scrabble_scores = {
       "A" => [9, 1], "B" => [2, 3], "C" => [2, 3], "D" => [4, 2], "E" => [12, 1],
@@ -13,6 +13,29 @@ class HomeController < ApplicationController
       "Z" => [1, 10]
     }
 
-    render :json => {random_string: "ASERRTVA"}
+    random_letters = []
+    scrabble_scores.map do |k,v|
+      (1..v[0]).each do
+        random_letters << k
+      end
+    end
+
+    random_set = []
+    (0..7).map do |i|
+      random_key = random_letters[rand(0..random_letters.length)]
+      random_set << [random_key, scrabble_scores[random_key][0]]
+    end
+
+    render :json => {random_set: random_set}
+  end
+
+  def answer
+    answer = params['answer']
+    is_valid = true
+    if $redis.get(answer) === nil
+      is_valid = false
+    end
+
+    render :json => {is_valid: is_valid}
   end
 end

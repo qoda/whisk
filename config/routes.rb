@@ -4,6 +4,8 @@ Whisk::Application.routes.draw do
 
   get "/ajax/random" => "home#random"
 
+  get "/ajax/answer/:answer" => "home#answer"
+
   root :to => "home#index"
 
   # The priority is based upon order of creation:

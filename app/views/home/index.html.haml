@@ -4,20 +4,29 @@
         %h3 Solve The Whisked Words
     .modal-body
         .well.centre
-            %h2 ADERRWXP
-        %form.centre{"method" => "POST", "action" => "/", "class" => "form-search"}
-            %input.input.input-xlarge{"type" => "text", "id" => "answer", "placeholder" => "Answer"}
-            %submit.btn.btn-primary Add
+            %h2.question
+            %h2.game-over{"style" => "display:none"}
+                Time's Up. Game Over
+        .alert.answer-feedback{"style" => "display:none"}
+            %span
+        .game-form
+            %form.centre{"method" => "POST", "action" => "/", "class" => "form-search"}
+                %input.input.input-xlarge.answer{"type" => "text", "placeholder" => "Answer"}
+                %submit.btn.btn-primary.submit-answer Add
+        .try-again.centre{"style" => "display:none"}
+            %a.btn.btn-large.btn-primary Try Again?
     .modal-footer
         %p
-            .row.span5
-                %h1
-                    12
-                    %small correct answers
-            .row.span5
-                %h1
-                    1:32
-                    %small time remaining
+            .row
+                .span6
+                    %h3.centre
+                        %small time remaining
+                    %h1.centre.game-timer
+                .span6
+                    %h3.centre
+                        %small overall score
+                    %h1.centre.game-score
+                        0
 
 .hero-unit
     %h1 Welcome To Whisk
@@ -29,6 +38,4 @@
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     %p &nbsp;
     %p
-        %a.btn.btn-large.btn-primary(href="#whisk-game"){"data-toggle" => "modal"} Play It!
-
-
+        %a.btn.btn-large.btn-primary.game-launch(href="#whisk-game"){"data-toggle" => "modal"} Play It!
